@@ -91,14 +91,17 @@ void InsertPrefix(struct node * root, char [] prefix, size_t nextHop){
 	return;
 }
 
-size_t LookUp (struct node * root, char [] addr){
-	if (root == NULL){
+size_t LookUp (struct node * root, char [] addr)
+{
+	if (root == NULL)
+	{
 		print("empty tree\n");
 		return;
 	}
 
 	size_t nextHop = root->nextHop;
 	for (int i = 0; i < strlen(addr) && root != NULL; i++)
+	{
 		if (addr[i] == 0)
 			root = root->left;
 		else
@@ -124,19 +127,101 @@ void PrintTable (struct node * root){
 
 struct node* DeletePrefix(struct node* root, char * prefix)
 {
-	struct node* aux;
+	struct nodeToDelete* deleteList = NULL;
+	struct node* aux = root;
+
+	struct node* nodeToStartDelete = NULL;
 
 	if( root == NULL )
 	{
 		print("Empty tree\n");
-		return;
+		return root;
+	}
+
+	// NON SENSE
+	if(prefix[0] == 'e')
+	{
+		if( (root->left == NULL ) && (root->right == NULL) )
+			return NULL;
+
+		root->nextHop = 0;
+
+		return root;
 	}
 
 	for(int i = 0; i = strlen(prefix); i++)
 	{
 		if(prefix[i] == '0')
 		{
-			
+			if(aux->left == NULL)
+			{
+				printf("Don't exist that prefix in the tree\n");
+				return root;
+			}
+			else
+			{
+				if( (aux->left->nextHop == 0) && ( ( aux->left->left == NULL ) || ( aux->left->right == NULL ) ) )
+				{
+					if(nodeToStartDelete == NULL)
+						nodeToStartDelete = aux;
+				}
+
+				aux = aux->left;
+			}
+		}
+		else if((prefix[i] == '1'))
+		{
+			if(aux->right == NULL)
+			{
+				printf("Don't exist that prefix in the tree\n");
+				return root;
+			}
+			else
+			{
+				if( (aux->right->nextHop == 0) && ( ( aux->right->left == NULL ) || ( aux->right->right == NULL ) ) )
+				{
+					if(previousDelete == NULL)
+						previousDelete = aux;
+					
+					deleteList = insertNewNodeToDelete(deleteList, aux->right);
+				}
+				else
+				{
+					ELIMINAR A LISTA
+				}
+
+				aux = aux->right;
+			}
+		}
+		else
+		{
+			printf("Prefix invalid\n");
 		}
 	}
+
+	deleteList = insertNewNodeToDelete(deleteList, aux);
+}
+
+
+
+struct nodeToDelete  
+{ 
+		struct node *pointer;
+		struct nodeToDelete *next; 
+}; 
+	
+/* newNode() allocates a new node with the given prefix and NULL left and  
+	 right pointers. */
+struct nodeToDelete* insertNewNodeToDelete(struct nodeToDelete* head, struct node *pointer) 
+{ 
+	// Allocate memory for new node  
+	struct nodeToDelete* deleteList = (struct nodeToDelete*)malloc(sizeof(struct nodeToDelete)); 
+	
+	// Assign prefix to this node  
+	deleteList->pointer = pointer;
+
+	// Initialize left and right children as NULL 
+	deleteList->next = head;
+
+	return(deleteList);
 }
