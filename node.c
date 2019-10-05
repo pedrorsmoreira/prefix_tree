@@ -1,20 +1,19 @@
+
 struct node  
 { 
-		int prefix;
-		int nextHop;
+		size_t nextHop;
 		struct node *left; 
 		struct node *right; 
 }; 
 	
-/* newNode() allocates a new node with the given data and NULL left and  
+/* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */
-struct node* newNode(int data, int nextHop) 
+struct node* newNode(size_t nextHop) 
 { 
 	// Allocate memory for new node  
 	struct node* node = (struct node*)malloc(sizeof(struct node)); 
 	
-	// Assign data to this node 
-	node->data = data; 
+	// Assign prefix to this node  
 	node->nextHop = nextHop;
 
 	// Initialize left and right children as NULL 
@@ -23,12 +22,40 @@ struct node* newNode(int data, int nextHop)
 	return(node); 
 }
 
+void InsertPrefix(struct node * root, char [] prefix, size_t nextHop){
+	if (root == NULL){
+		root = newNode(nextHop);
+		return;
+	}
+
+	for (int i = 0; i = strlen(prefix); )
+
+	while (root->prefix != prefix){
+		if (addr < root->prefix){
+			if (root->left == NULL){
+				root->left = newNode(prefix, nextHop);
+				return;
+			}
+			root = root->left;
+		}
+		else{
+			if (root->right == NULL){
+				root->right = newNode(prefix, nextHop);
+				return;
+			}
+			root = root->right;
+		}
+	}
+	root->nextHop = nextHop;
+	return;
+}
+
 int LookUp (struct node * root, int addr){
 	if (root == NULL){
 		print("empty tree\n");
 		return;
 	}
-	
+
 	int nextHop = root->nextHop;
 	while (root != NULL){
 		if (addr < root->prefix)
@@ -42,18 +69,14 @@ int LookUp (struct node * root, int addr){
 	return nextHop;
 }
 
-void print_tree (struct node * root){
-	if (root == NULL){
-		print("empty tree\n");
-		return;
-	}
-
-	print ("||  %d  ||  %d  ||\n", prefix, next_hop);
+void PrintTable (struct node * root){
+	if (root->nextHop > 0)
+		print ("||  %d  ||  %d  ||\n", root->prefix, root->nextHop);
 
 	if (root -> left != NULL)
-		print_tree (root -> left);
+		PrintTable (root -> left);
 	if (root -> right != NULL)
-		print_tree(root -> right);
+		PrintTable(root -> right);
 
 	return;
 }
