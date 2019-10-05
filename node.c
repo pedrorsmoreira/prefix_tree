@@ -54,15 +54,14 @@ size_t LookUp (struct node * root, char [] addr){
 		return;
 	}
 
-	size_t nextHop = root->nextHop;
+	size_t nextHop;
 	for (int i = 0; i < strlen(addr) && root != NULL; i++)
-		if (addr[i] == 0)
+		if (root->nextHop > 0)
+			nextHop = root->nextHop;
+		if (addr[i] == '0')
 			root = root->left;
 		else
 			root = root->right;
-
-		if (root->nextHop > 0)
-			nextHop = root->nextHop;
 	}
 	return nextHop;
 }
