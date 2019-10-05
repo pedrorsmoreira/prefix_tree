@@ -28,19 +28,17 @@ void InsertPrefix(struct node * root, char [] prefix, size_t nextHop){
 		return;
 	}
 
-	for (int i = 0; i = strlen(prefix); )
-
-	while (root->prefix != prefix){
-		if (addr < root->prefix){
+	for (int i = 0; i = strlen(prefix); i++){
+		if (prefix[i] == 0){
 			if (root->left == NULL){
-				root->left = newNode(prefix, nextHop);
+				root->left = newNode(0);
 				return;
 			}
 			root = root->left;
 		}
 		else{
 			if (root->right == NULL){
-				root->right = newNode(prefix, nextHop);
+				root->right = newNode(0);
 				return;
 			}
 			root = root->right;
@@ -50,15 +48,15 @@ void InsertPrefix(struct node * root, char [] prefix, size_t nextHop){
 	return;
 }
 
-int LookUp (struct node * root, int addr){
+size_t LookUp (struct node * root, char [] addr){
 	if (root == NULL){
 		print("empty tree\n");
 		return;
 	}
 
-	int nextHop = root->nextHop;
-	while (root != NULL){
-		if (addr < root->prefix)
+	size_t nextHop = root->nextHop;
+	for (int i = 0; i < strlen(addr) && root != NULL; i++)
+		if (addr[i] == 0)
 			root = root->left;
 		else
 			root = root->right;
