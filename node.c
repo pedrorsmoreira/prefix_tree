@@ -99,29 +99,40 @@ size_t LookUp (struct node * root, char [] addr)
 		return;
 	}
 
-	size_t nextHop = root->nextHop;
+	size_t nextHop;
 	for (int i = 0; i < strlen(addr) && root != NULL; i++)
 	{
-		if (addr[i] == 0)
+		if (root->nextHop > 0)
+			nextHop = root->nextHop;
+		if (addr[i] == '0')
 			root = root->left;
 		else
 			root = root->right;
-
-		if (root->nextHop > 0)
-			nextHop = root->nextHop;
 	}
 	return nextHop;
 }
 
 void PrintTable (struct node * root){
-	if (root->nextHop > 0)
-		print ("||  %d  ||  %d  ||\n", root->prefix, root->nextHop);
+	if (root == NULL) printf("empty tree\n");
 
-	if (root -> left != NULL)
-		PrintTable (root -> left);
-	if (root -> right != NULL)
-		PrintTable(root -> right);
+	struct fifoTips tips;
+	put (tips, "0", root);
+	while (!isEmpty(tips)){
+		struct fifo * element = get(tips);
+		if (element->node->nextHop != 0)
+			printf("||  %s  ||  %zu  ||\n", element->prefix, element->node->nextHop);
 
+		int level = strlen(element->prefix) - 1;
+		if (element->node->left != NULL){
+			element->prefix[level] = 0;
+			put (tips, element->prefix, element->node->left);
+		}
+		if (element->node->right != NULL){
+			element->prefix[level] = 1;
+			put (tips, element->prefix, element->node->right);
+		}
+		free (element);
+	}
 	return;
 }
 
@@ -224,4 +235,39 @@ struct nodeToDelete* insertNewNodeToDelete(struct nodeToDelete* head, struct nod
 	deleteList->next = head;
 
 	return(deleteList);
+
+struct fifo{
+	char prefix [16];
+	struct node * node;
+	struct fifo * next;
+};
+
+struct fifoTips{
+	struct fifo * head;
+	struct fifo * tail;
+};
+
+bool isEmpty(struct fifoTips tips){
+	return (tips.head == NULL)
+}
+
+void put(struct fifoTips tips, char [16] prefix, struct node * node){
+	struct fifo * element = (struct fifo *)malloc(sizeof(struct fifo));
+	element->node = node;
+	element->next = NULL;
+
+	if (tips.tail == NULL){
+		tips.tail = element;
+		tips.head = element;
+	}
+	else{
+		tips.tail->next = element;
+		tips.tail = element;
+	}
+}
+
+struct fifo * get(struct fifoTips tips){
+	struct fifo * ret = tips.head;
+	tips.head = tips.head->next;
+	return ret;
 }
