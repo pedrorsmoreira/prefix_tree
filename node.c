@@ -205,6 +205,12 @@ void PrintTable (struct node * root)
 	return;
 }
 
+void updateDeletingVariables (int* auxToStartDeleting, int value, struct node** nodeToStartDeleting, struct node* pointer)
+{
+	*auxToStartDeleting = value;
+	*nodeToStartDeleting = pointer;
+}
+
 struct node* DeletePrefix (struct node* root, char prefix[])
 {
 	struct node* aux = root;
@@ -241,33 +247,21 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 			else
 			{
 				if ((aux->left->left != NULL) && (aux->left->right != NULL))
-				{
-					auxToStartDeleting = 2;
-					nodeToStartDeleting = NULL;
-				}
+					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				else if ((aux->left->left != NULL) || (aux->left->right != NULL))
 				{
 					if (aux->left->nextHop == 0)
 					{
 						if (nodeToStartDeleting == NULL)
-						{
-							auxToStartDeleting = 0;
-							nodeToStartDeleting = aux;
-						}
+							updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
 					}
 					else
-					{
-						auxToStartDeleting = 2;
-						nodeToStartDeleting = NULL;
-					}
+						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
 				else
 				{
 					if (nodeToStartDeleting == NULL)
-					{
-						auxToStartDeleting = 0;
-						nodeToStartDeleting = aux;
-					}
+						updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
 				}
 
 				aux = aux->left;
@@ -283,33 +277,21 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 			else
 			{
 				if ((aux->right->left != NULL) && (aux->right->right != NULL))
-				{
-					auxToStartDeleting = 2;
-					nodeToStartDeleting = NULL;
-				}
+					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				else if ((aux->right->left != NULL) || (aux->right->right != NULL))
 				{
 					if (aux->right->nextHop == 0)
 					{
 						if (nodeToStartDeleting == NULL)
-						{
-							auxToStartDeleting = 1;
-							nodeToStartDeleting = aux;
-						}
+							updateDeletingVariables (&auxToStartDeleting, 1, &nodeToStartDeleting, aux);
 					}
 					else
-					{
-						auxToStartDeleting = 2;
-						nodeToStartDeleting = NULL;
-					}
+						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
 				else
 				{
 					if (nodeToStartDeleting == NULL)
-					{
-						auxToStartDeleting = 1;
-						nodeToStartDeleting = aux;
-					}
+						updateDeletingVariables (&auxToStartDeleting, 1, &nodeToStartDeleting, aux);
 				}
 
 				aux = aux->right;

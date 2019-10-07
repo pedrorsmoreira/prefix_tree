@@ -27,6 +27,8 @@ struct fifo * get (struct fifoTips tips);
 
 void PrintTable (struct node* root);
 
+void updateDeletingVariables (int* auxToStartDeleting, int value, struct node** nodeToStartDeleting, struct node* pointer);
+
 struct node* DeletePrefix (struct node* root, char* prefix);
 
 
