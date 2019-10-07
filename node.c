@@ -26,6 +26,7 @@ struct fifoTips
 	struct fifo * tail;
 };
 
+struct fifoTips tips;
 
 // Functions
 	
@@ -147,14 +148,15 @@ size_t LookUp (struct node * root, char addr[])
 	return nextHop;
 }
 
-bool isEmpty (struct fifoTips tips)
+bool isEmpty ()
 {
 	return (tips.head == NULL);
 }
 
-void put (struct fifoTips tips, char prefix[16], struct node * node)
+void put (char prefix[16], struct node * node)
 {
 	struct fifo * element = (struct fifo *)malloc(sizeof(struct fifo));
+	strcpy(element->prefix, prefix);
 	element->node = node;
 	element->next = NULL;
 
@@ -168,7 +170,7 @@ void put (struct fifoTips tips, char prefix[16], struct node * node)
 	}
 }
 
-struct fifo * get (struct fifoTips tips)
+struct fifo * get ()
 {
 	struct fifo * ret = tips.head;
 	tips.head = tips.head->next;
@@ -182,26 +184,29 @@ void PrintTable (struct node * root)
 
 	struct fifoTips tips;
 	tips.head = NULL;
-	put (tips, "0", root);
-	while (!isEmpty(tips))
-	{
-		struct fifo * element = get(tips);
+	put ("", root);
+	
+	do {
+		struct fifo * element = get();
 		if (element->node->nextHop != 0)
 			printf("||  %s  ||  %zu  ||\n", element->prefix, element->node->nextHop);
 
-		int level = strlen(element->prefix) - 1;
 		if (element->node->left != NULL)
 		{
-			element->prefix[level] = 0;
-			put (tips, element->prefix, element->node->left);
+			strcat(element->prefix, "0");
+			put (element->prefix, element->node->left);
+			if (element->node->right != NULL){
+				element->prefix[strlen(element->prefix)-1] = '1';
+				put (element->prefix, element->node->right);
+			}
 		}
-		if (element->node->right != NULL)
+		else if (element->node->right != NULL)
 		{
-			element->prefix[level] = 1;
-			put (tips, element->prefix, element->node->right);
+			strcat(element->prefix, "1");
+			put (element->prefix, element->node->right);
 		}
 		free (element);
-	}
+	} while (!isEmpty());
 	return;
 }
 

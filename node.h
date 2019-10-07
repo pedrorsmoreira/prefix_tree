@@ -19,11 +19,11 @@ struct node* InsertPrefix (struct node* root, char prefix[], size_t nextHop);
 
 size_t LookUp (struct node* root, char addr[]);
 
-bool isEmpty (struct fifoTips tips);
+bool isEmpty ();
 
-void put (struct fifoTips tips, char prefix[16], struct node* node);
+void put (char prefix[16], struct node* node);
 
-struct fifo * get (struct fifoTips tips);
+struct fifo * get ();
 
 void PrintTable (struct node* root);
 
