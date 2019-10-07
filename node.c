@@ -180,7 +180,7 @@ void PrintTable (struct node * root)
 	tips.head = NULL;
 	put (tips, "0", root);
 	while (!isEmpty(tips))
-	{
+	{printf("oi\n");
 		struct fifo * element = get(tips);
 		if (element->node->nextHop != 0)
 			printf("||  %s  ||  %zu  ||\n", element->prefix, element->node->nextHop);
