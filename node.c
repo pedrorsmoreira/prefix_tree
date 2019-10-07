@@ -67,8 +67,10 @@ struct node* PrefixTree (char* filename)
 		char *token = strtok (line, " ");
 		char *token2 = strtok (NULL, " ");
 
+		/*
 		printf("token: %s\n", token);
 		printf("token2: %s\n", token2);
+		*/
 
 		if ((token == NULL) && (token2 == NULL))
 		{
@@ -78,7 +80,7 @@ struct node* PrefixTree (char* filename)
 
 		root = InsertPrefix (root, token, atoi(token2));
 
-		printf("next line\n\n");
+		//printf("next line\n\n");
 	}
 
 	fclose (fp);
@@ -90,7 +92,6 @@ struct node* InsertPrefix (struct node * root, char prefix[], size_t nextHop)
 {
 	if (root == NULL)
 	{
-		printf("iuuuu criei o nó e\n");
 		root = newNode(nextHop);
 		return root;
 	}
@@ -157,7 +158,7 @@ void put (struct fifoTips tips, char prefix[16], struct node * node)
 	element->node = node;
 	element->next = NULL;
 
-	if (tips.tail == NULL){
+	if (tips.head == NULL){
 		tips.tail = element;
 		tips.head = element;
 	}
@@ -180,6 +181,7 @@ void PrintTable (struct node * root)
 		printf("Empty Tree\n");
 
 	struct fifoTips tips;
+	tips.head = NULL;
 	put (tips, "0", root);
 	while (!isEmpty(tips))
 	{
@@ -231,8 +233,6 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 	{
 		if (prefix[i] == '0')
 		{
-			printf("Left\n");
-
 			if (aux->left == NULL)
 			{
 				printf("Don't exist that prefix in the tree\n");
@@ -275,8 +275,6 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 		}
 		else if (prefix[i] == '1')
 		{
-			printf("Right\n");
-
 			if (aux->right == NULL)
 			{
 				printf("Don't exist that prefix in the tree\n");
