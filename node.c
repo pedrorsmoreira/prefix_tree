@@ -4,6 +4,8 @@
 
 #include "node.h"
 
+// Structures
+
 struct node  
 { 
 		size_t nextHop;
@@ -25,6 +27,7 @@ struct fifoTips
 };
 
 
+// Functions
 	
 /* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */
@@ -320,9 +323,9 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 		}
 	}
 
-	printf("aux->nextHop: %d\n", aux->nextHop);
-	printf("nodeToStartDeleting->nextHop: %d\n", nodeToStartDeleting->nextHop);
-	printf("nodeToStartDeleting->right->nextHop: %d\n", nodeToStartDeleting->right->nextHop);
+	//printf("aux->nextHop: %d\n", aux->nextHop);
+	//printf("nodeToStartDeleting->nextHop: %d\n", nodeToStartDeleting->nextHop);
+	//printf("nodeToStartDeleting->right->nextHop: %d\n", nodeToStartDeleting->right->nextHop);
 
 	// Deleting part
 	if (nodeToStartDeleting == NULL)
@@ -353,4 +356,9 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 	}
 
 	return root;
+}
+
+struct node* CompressTree (struct node* root)
+{
+
 }
