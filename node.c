@@ -4,6 +4,8 @@
 
 #include "node.h"
 
+// Structures
+
 struct node  
 { 
 		size_t nextHop;
@@ -25,6 +27,7 @@ struct fifoTips
 };
 
 
+// Functions
 	
 /* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */
@@ -64,8 +67,10 @@ struct node* PrefixTree (char* filename)
 		char *token = strtok (line, " ");
 		char *token2 = strtok (NULL, " ");
 
+		/*
 		printf("token: %s\n", token);
 		printf("token2: %s\n", token2);
+		*/
 
 		if ((token == NULL) && (token2 == NULL))
 		{
@@ -75,7 +80,7 @@ struct node* PrefixTree (char* filename)
 
 		root = InsertPrefix (root, token, atoi(token2));
 
-		printf("next line\n\n");
+		//printf("next line\n\n");
 	}
 
 	fclose (fp);
@@ -87,7 +92,6 @@ struct node* InsertPrefix (struct node * root, char prefix[], size_t nextHop)
 {
 	if (root == NULL)
 	{
-		printf("iuuuu criei o nó e\n");
 		root = newNode(nextHop);
 		return root;
 	}
@@ -229,8 +233,6 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 	{
 		if (prefix[i] == '0')
 		{
-			printf("Left\n");
-
 			if (aux->left == NULL)
 			{
 				printf("Don't exist that prefix in the tree\n");
@@ -273,8 +275,6 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 		}
 		else if (prefix[i] == '1')
 		{
-			printf("Right\n");
-
 			if (aux->right == NULL)
 			{
 				printf("Don't exist that prefix in the tree\n");
@@ -321,9 +321,9 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 		}
 	}
 
-	printf("aux->nextHop: %d\n", aux->nextHop);
-	printf("nodeToStartDeleting->nextHop: %d\n", nodeToStartDeleting->nextHop);
-	printf("nodeToStartDeleting->right->nextHop: %d\n", nodeToStartDeleting->right->nextHop);
+	//printf("aux->nextHop: %d\n", aux->nextHop);
+	//printf("nodeToStartDeleting->nextHop: %d\n", nodeToStartDeleting->nextHop);
+	//printf("nodeToStartDeleting->right->nextHop: %d\n", nodeToStartDeleting->right->nextHop);
 
 	// Deleting part
 	if (nodeToStartDeleting == NULL)
@@ -354,4 +354,9 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 	}
 
 	return root;
+}
+
+struct node* CompressTree (struct node* root)
+{
+
 }
