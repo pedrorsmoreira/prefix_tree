@@ -154,7 +154,7 @@ void put (struct fifoTips tips, char prefix[16], struct node * node)
 	element->node = node;
 	element->next = NULL;
 
-	if (tips.tail == NULL){
+	if (tips.head == NULL){
 		tips.tail = element;
 		tips.head = element;
 	}
@@ -177,6 +177,7 @@ void PrintTable (struct node * root)
 		printf("Empty Tree\n");
 
 	struct fifoTips tips;
+	tips.head = NULL;
 	put (tips, "0", root);
 	while (!isEmpty(tips))
 	{

@@ -27,7 +27,9 @@ int main(int argc, char *argv[])
 	}
 
 	struct node* root = PrefixTree (filename);
+	PrintTable(root);
 
+/*
 	printf("Prefix %s Next-hop: %d\n", "11010011", LookUp (root, "11010011"));
 	printf("Prefix %s Next-hop: %d\n", "11000011", LookUp (root, "11000011"));
 	printf("Prefix %s Next-hop: %d\n", "000", LookUp (root, "000"));
@@ -35,10 +37,10 @@ int main(int argc, char *argv[])
 	printf("Prefix %s Next-hop: %d\n", "010", LookUp (root, "0"));
 
 	printf("\n");
-	root = DeletePrefix (root, "0");
+	//root = DeletePrefix (root, "0");
 	printf("\n");
 
-	printf("Prefix %s Next-hop: %d\n", "010",LookUp (root, "0"));
+	printf("Prefix %s Next-hop: %d\n", "010",LookUp (root, "0"));*/
 
 	return 0;  
 }
