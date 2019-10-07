@@ -36,7 +36,17 @@ int main(int argc, char *argv[])
 
 	root = DeletePrefix (root, "010");
 
+	PrintTable(root);
+
 	printf("Prefix %s Next-hop: %d\n", "010", LookUp (root, "010"));
+
+	printf("Prefix %s Next-hop: %d\n", "1001", LookUp (root, "1001"));
+
+	root = DeletePrefix (root, "1001");
+
+	PrintTable(root);
+
+	printf("Prefix %s Next-hop: %d\n", "1001", LookUp (root, "1001"));
 
 	return 0;  
 }
