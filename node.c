@@ -365,8 +365,11 @@ struct node* CompressTree (struct node* root)
 	return root;
 }
 
-intersect(intList * list1, intList, * list1){
+struct intList * intersect(intList * list1, intList, * list1){
+	list1 = quicksort(list1);
+	list2 = quicksort(list2);
 
+	return result;
 }
 
 struct intList {
