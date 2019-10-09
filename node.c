@@ -6,12 +6,6 @@
 
 // Structures
 
-struct node  
-{ 
-		size_t nextHop;
-		struct node *left; 
-		struct node *right; 
-}; 
 
 struct fifo
 {
@@ -43,6 +37,8 @@ struct node* newNode (size_t nextHop)
 	// Initialize left and right children as NULL 
 	node->left = NULL; 
 	node->right = NULL;
+
+	node->hopsList = NULL;
 
 	return(node); 
 }
@@ -363,5 +359,61 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 
 struct node* CompressTree (struct node* root)
 {
+	//step 1
+	if (root->left == NULL){
+		if (root->right == NULL){
+			root->hopsList = newIntList(root->nextHop);
+			return root;
+		}
+			
+		else
+			root->left = newNode(root->nextHop);
+	} else if (root->right == NULL){
+		root->right = newNode(root->nextHop);
+	}
+
+	root->nextHop = 0;
+
+	struct intList * hopsList1 = CompressTree(root->left)->hopsList;
+	struct intList * hopsList2 = CompressTree(root->right)->hopsList;
+
+	//step2
+	root->hopsList = intersect(hopsList1, hopsList2);
+
+	return root;
+}
+
+intersect(intList * list1, intList, * list1){
 
 }
+
+struct intList {
+	int hop;
+	struct intList * next;
+}
+
+struct node* newIntList (size_t value) 
+{ 
+	// Allocate memory for new node  
+	struct intList* list = (struct intList*) malloc (sizeof(struct intList)); 
+	list->next = value;
+
+	return(list); 
+}
+
+void emptyIntList(struct intList * list)
+{
+	while (list != NULL){
+		struct intList * aux = NULL;
+		list = list->next;
+		free(aux);
+	}
+};
+
+struct node  
+{ 
+		size_t nextHop;
+		struct node *left; 
+		struct node *right;
+		struct intList * hopsList:
+}; 
