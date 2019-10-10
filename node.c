@@ -345,32 +345,41 @@ struct node* CompressTree (struct node* root)
 
 	root->nextHop = root->hopsList->hop;
 
-	X = PassThree (root->left);
-	X = PassThree (root->right);
+	root->left = PassThree (root->left, root->nextHop);
+	root->right = PassThree (root->right, root->nextHop);
 }
 
-struct node* PassThree (struct node* root)
+bool search (struct intList* hopsList, int value)
 {
-	
+    struct intList* current = hopsList;  // Initialize current 
+    while (current != NULL) 
+    { 
+        if (current->hop == value) 
+            return true; 
+        current = current->next; 
+    }
+
+    return false; 
+}
+
+struct node* PassThree (struct node* aux, int nextHop)
+{
+	if (search (aux->hopsList, nextHop))
+		aux->nextHop = 0;
+	else
+		aux->nextHop = aux->hopsList->nextHop;
+
+	if (aux->left != NULL)
+		aux->left = PassThree (aux->left, aux->nextHop);
+	if (aux->right != NULL)
+		aux->right = PassThree (aux->right, aux->nextHop);
+
+	return aux;
 }
 
 struct node* PassOneTwo (struct node* root)
 {
 	//step 1
-<<<<<<< HEAD
-	if (root->left == NULL)
-	{
-		if (root->right == NULL)
-		{
-			root->hopsList = newIntList(root->nextHop);
-			return root;
-		}
-		else
-			root->left = newNode(root->nextHop);
-	} 
-	else if (root->right == NULL)
-	{
-=======
 	if (root->left == NULL){
 		if (root->right == NULL){ //leaf
 			root->hopsList = newIntList(root->nextHop);
@@ -379,27 +388,15 @@ struct node* PassOneTwo (struct node* root)
 		else //1 right child
 			root->left = newNode(root->nextHop);
 
-	} else if (root->right == NULL) //1 left child
->>>>>>> d8ebb251b815533240c14abe019bfd3cc2b72c15
+	}
+	else if (root->right == NULL) //1 left child
 		root->right = newNode(root->nextHop);
-
-	else{ //2 childs
+	else
+	{ //2 childs
 		if (root->left->nextHop == 0)
 			root->left->nextHop = root->nextHop
 		if (root->right->nextHop == 0)
 			root->right->nextHop = root->nextHop;
-	}
-
-	//FALTA CONDIÇÃO SE ELE TIVER 2 FILHOS, ISTO NAO TA BACANO
-
-	if (root->left->nextHop != 0)
-	{
-		root->left->nextHop = root->nextHop;
-	}
-
-	if (root->right->nextHop != 0)
-	{
-		root->right->nextHop = root->nextHop;
 	}
 
 	root->nextHop = 0;
