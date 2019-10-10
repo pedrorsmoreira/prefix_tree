@@ -371,7 +371,8 @@ struct node* CompressTree (struct node* root)
 	return root;
 }
 
-struct intList * intersect(intList * list1, intList, * list2){
+struct intList * intersect(intList * list1, intList, * list2)
+{
 	struct intList *aux1=list1, *aux2, *result=NULL, result_aux;
 
 	while (1){
@@ -382,8 +383,10 @@ struct intList * intersect(intList * list1, intList, * list2){
 					result = newIntList(aux1->hop);
 					result_aux = result;
 				}
-				result_aux->hop = newIntList(aux1->hop);
-				result_aux = result_aux->next;
+				else{
+					result_aux->next = newIntList(aux1->hop);
+					result_aux = result_aux->next;
+				}
 			}
 			aux2 = aux2->next;
 		}
@@ -395,7 +398,7 @@ struct intList * intersect(intList * list1, intList, * list2){
 		result = list1;
 		aux1->next = list2;
 	}
-	
+
 	return result;
 }
 
