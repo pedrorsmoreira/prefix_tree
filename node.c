@@ -341,26 +341,57 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 
 struct node* CompressTree (struct node* root)
 {
+	root = PassOneTwo (root);
+
+	root->nextHop = root->hopsList->hop;
+
+	X = PassThree (root->left);
+	X = PassThree (root->right);
+}
+
+struct node* PassThree (struct node* root)
+{
+	
+}
+
+struct node* PassOneTwo (struct node* root)
+{
 	//step 1
-	if (root->left == NULL){
-		if (root->right == NULL){
+	if (root->left == NULL)
+	{
+		if (root->right == NULL)
+		{
 			root->hopsList = newIntList(root->nextHop);
 			return root;
 		}
-			
 		else
 			root->left = newNode(root->nextHop);
-	} else if (root->right == NULL){
+	} 
+	else if (root->right == NULL)
+	{
 		root->right = newNode(root->nextHop);
+	}
+
+	//FALTA CONDIÇÃO SE ELE TIVER 2 FILHOS, ISTO NAO TA BACANO
+
+	if (root->left->nextHop != 0)
+	{
+		root->left->nextHop = root->nextHop;
+	}
+
+	if (root->right->nextHop != 0)
+	{
+		root->right->nextHop = root->nextHop;
 	}
 
 	root->nextHop = 0;
 
-	struct intList * hopsList1 = CompressTree(root->left)->hopsList;
-	struct intList * hopsList2 = CompressTree(root->right)->hopsList;
+	struct intList * hopsList1 = PassOneTwo(root->left)->hopsList;
+	struct intList * hopsList2 = PassOneTwo(root->right)->hopsList;
 
 	//step2
 	root->hopsList = intersect(hopsList1, hopsList2);
+
 
 	return root;
 }
@@ -369,7 +400,8 @@ intersect(intList * list1, intList, * list1){
 
 }
 
-struct intList {
+struct intList 
+{
 	int hop;
 	struct intList * next;
 }
@@ -385,7 +417,8 @@ struct node* newIntList (size_t value)
 
 void emptyIntList(struct intList * list)
 {
-	while (list != NULL){
+	while (list != NULL)
+	{
 		struct intList * aux = NULL;
 		list = list->next;
 		free(aux);
