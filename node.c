@@ -415,8 +415,10 @@ struct node* PassOneTwo (struct node* root)
 }
 
 struct intList * intersect(intList * list1, intList, * list1){
-	list1 = quicksort(list1);
-	list2 = quicksort(list2);
+	
+	while (list1 != NULL){
+		if(list1)
+	}
 
 	return result;
 }
@@ -431,7 +433,8 @@ struct node* newIntList (size_t value)
 { 
 	// Allocate memory for new node  
 	struct intList* list = (struct intList*) malloc (sizeof(struct intList)); 
-	list->next = value;
+	list->hop = value;
+	list->next = NULL;
 
 	return(list); 
 }
