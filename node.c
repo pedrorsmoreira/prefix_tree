@@ -357,6 +357,7 @@ struct node* PassThree (struct node* root)
 struct node* PassOneTwo (struct node* root)
 {
 	//step 1
+<<<<<<< HEAD
 	if (root->left == NULL)
 	{
 		if (root->right == NULL)
@@ -369,7 +370,24 @@ struct node* PassOneTwo (struct node* root)
 	} 
 	else if (root->right == NULL)
 	{
+=======
+	if (root->left == NULL){
+		if (root->right == NULL){ //leaf
+			root->hopsList = newIntList(root->nextHop);
+			return root;
+		}
+		else //1 right child
+			root->left = newNode(root->nextHop);
+
+	} else if (root->right == NULL) //1 left child
+>>>>>>> d8ebb251b815533240c14abe019bfd3cc2b72c15
 		root->right = newNode(root->nextHop);
+
+	else{ //2 childs
+		if (root->left->nextHop == 0)
+			root->left->nextHop = root->nextHop
+		if (root->right->nextHop == 0)
+			root->right->nextHop = root->nextHop;
 	}
 
 	//FALTA CONDIÇÃO SE ELE TIVER 2 FILHOS, ISTO NAO TA BACANO
@@ -396,8 +414,11 @@ struct node* PassOneTwo (struct node* root)
 	return root;
 }
 
-intersect(intList * list1, intList, * list1){
+struct intList * intersect(intList * list1, intList, * list1){
+	list1 = quicksort(list1);
+	list2 = quicksort(list2);
 
+	return result;
 }
 
 struct intList 
