@@ -343,15 +343,21 @@ struct node* CompressTree (struct node* root)
 {
 	//step 1
 	if (root->left == NULL){
-		if (root->right == NULL){
+		if (root->right == NULL){ //leaf
 			root->hopsList = newIntList(root->nextHop);
 			return root;
 		}
-			
-		else
+		else //1 right child
 			root->left = newNode(root->nextHop);
-	} else if (root->right == NULL){
+
+	} else if (root->right == NULL) //1 left child
 		root->right = newNode(root->nextHop);
+
+	else{ //2 childs
+		if (root->left->nextHop == 0)
+			root->left->nextHop = root->nextHop
+		if (root->right->nextHop == 0)
+			root->right->nextHop = root->nextHop;
 	}
 
 	root->nextHop = 0;
