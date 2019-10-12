@@ -2,17 +2,6 @@
 #include <stdio.h>
 
 #include "node.h"
-
-// Structures
-struct node  
-{ 
-		size_t nextHop;
-		struct node *left; 
-		struct node *right;
-		struct intList * hopsList;
-};
-
-// Functions
 	
 /* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */
