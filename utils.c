@@ -76,7 +76,7 @@ Node* PassThree (Node* aux, int nextHop)
 	}
 	else
 	{
-		aux->nextHop = aux->hopsList->nextHop;
+		aux->nextHop = aux->hopsList->hop;
 		value = aux->nextHop;
 	}
 

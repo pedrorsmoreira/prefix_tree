@@ -3,11 +3,6 @@
 
 #include "list.h"
 
-struct intList 
-{
-	int hop;
-	struct intList * next;
-};
 
 IntList* newIntList (size_t value) 
 { 
