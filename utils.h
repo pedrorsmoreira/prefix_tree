@@ -7,7 +7,12 @@
 
 void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToStartDeleting, struct node* pointer);
 
+
 void printAll (IntList* head);
+
+int getDigits(int h);
+
+void print(char p[16], int h);
 
 struct node* PassOneTwo (Node* root);
 

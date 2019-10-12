@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <math.h>
 
 #include "utils.h"
 
@@ -8,6 +10,37 @@ void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToS
 {
 	*auxToStartDeleting = value;
 	*nodeToStartDeleting = pointer;
+}
+
+
+int getDigits(int h) {
+	int size = 0;
+	while(h!=0) {
+		h = h/10;
+		size++;
+	}
+}
+
+void print(char p[16], int h){
+	printf("|| ");
+	for (int i = 0;  i < (int) floor( (16 - strlen(p) )/ (double) 2); i++){
+		printf(" ");
+	}
+	printf("%s", p);
+	for (int i = 0;  i < (int) ceil( (16 - strlen(p) )/ (double) 2); i++){
+		printf(" ");
+	}
+	printf(" || ");
+
+	int size = getDigits(h);
+	for (int i = 0;  i < (int) floor((8 - size )/ (double) 2); i++){
+		printf(" ");
+	}
+	printf("%d", h);
+	for (int i = 0;  i < (int) ceil((8 - size )/ (double) 2) ; i++){
+		printf(" ");
+	}
+	printf(" ||\n");
 }
 
 void printAll (IntList* head)
