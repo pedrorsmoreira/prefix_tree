@@ -11,6 +11,12 @@ int main(int argc, char *argv[])
 	int opt;
 	char* filename = NULL;
 
+	if (argc < 2)
+	{
+		print_usage(argv[0]);
+		exit(1);
+	}
+
 	while ((opt = getopt(argc, argv, "f:")) != -1) 
 	{
 		switch (opt) 
@@ -34,7 +40,11 @@ int main(int argc, char *argv[])
 
 	printf("\n");
 
-	root = CompressTree (root);
+	//root = CompressTree (root);
+
+	//PrintTable(root);
+
+	root = DeletePrefix (root, "e");
 
 	PrintTable(root);
 
