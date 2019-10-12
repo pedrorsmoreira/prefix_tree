@@ -108,6 +108,8 @@ Node* PassThree (Node* aux, int nextHop)
 		value = aux->nextHop;
 	}
 
+	emptyIntList(aux->hopsList);
+
 	if (aux->left == NULL) {
 		if (aux->right == NULL) {
 			if (aux->nextHop == 0) {

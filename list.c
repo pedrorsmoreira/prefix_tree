@@ -16,8 +16,10 @@ IntList* newIntList (size_t value)
 
 void emptyIntList(IntList* list)
 {
+	IntList* aux = list;
+
 	while (list != NULL) {
-		IntList* aux = NULL;
+		aux = list;
 		list = list->next;
 		free(aux);
 	}
