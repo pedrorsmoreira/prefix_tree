@@ -16,6 +16,8 @@ IntList* newIntList (size_t value);
 
 void emptyIntList(IntList* list);
 
+IntList* unite(IntList* l1, IntList* l2);
+
 IntList* intersect(IntList* list1, IntList* list2);
 
 /* End if: Protect multiple inclusions                              */
