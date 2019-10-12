@@ -1,8 +1,16 @@
+/* Prevent multiple inclusions                                      */
+#ifndef LIST
+#define LIST
 
-struct intList;
+#include "node.h"
 
-struct node* newIntList (size_t value);
+typedef struct intList IntList;
 
-void emptyIntList(struct intList * list);
+IntList* newIntList (size_t value);
 
-struct intList * intersect(intList * list1, intList, * list2);
+void emptyIntList(IntList* list);
+
+IntList* intersect(IntList* list1, IntList* list2);
+
+/* End if: Protect multiple inclusions                              */
+#endif

@@ -1,29 +1,25 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
 #include "node.h"
 
 // Structures
-
 struct node  
 { 
 		size_t nextHop;
 		struct node *left; 
 		struct node *right;
-		struct intList * hopsList:
+		struct intList * hopsList;
 };
-
-extern struct fifo Tips tips;
 
 // Functions
 	
 /* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */
-struct node* newNode (size_t nextHop) 
+Node* newNode (size_t nextHop) 
 { 
 	// Allocate memory for new node  
-	struct node* node = (struct node*) malloc (sizeof(struct node)); 
+	Node* node = (Node*) malloc (sizeof(Node)); 
 	
 	// Assign prefix to this node  
 	node->nextHop = nextHop;

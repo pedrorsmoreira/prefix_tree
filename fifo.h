@@ -1,10 +1,20 @@
+/* Prevent multiple inclusions                                      */
+#ifndef FIFO
+#define FIFO
 
-struct fifo;
+#include <stdbool.h>
 
-struct fifoTips;
+#include "node.h"
+
+typedef struct fifo Fifo;
+
+typedef struct fifoTips FifoTips;
 
 bool isEmpty ();
 
-void put (char prefix[16], struct node* node);
+void put (char prefix[16], Node* node);
 
-struct fifo * get ();
+Fifo * get ();
+
+/* End if: Protect multiple inclusions                              */
+#endif

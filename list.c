@@ -1,32 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "list.h"
+
 struct intList 
 {
 	int hop;
 	struct intList * next;
-}
+};
 
-struct node* newIntList (size_t value) 
+IntList* newIntList (size_t value) 
 { 
 	// Allocate memory for new node  
-	struct intList* list = (struct intList*) malloc (sizeof(struct intList)); 
+	IntList* list = (IntList*) malloc (sizeof(IntList)); 
 	list->hop = value;
 	list->next = NULL;
 
 	return(list); 
 }
 
-void emptyIntList(struct intList * list)
+void emptyIntList(IntList* list)
 {
 	while (list != NULL)
 	{
-		struct intList * aux = NULL;
+		IntList* aux = NULL;
 		list = list->next;
 		free(aux);
 	}
 };
 
-struct intList * intersect(intList * list1, intList, * list2)
+IntList* intersect(IntList* list1, IntList* list2)
 {
-	struct intList *aux1=list1, *aux2, *result=NULL, result_aux;
+	IntList* aux1 = list1, *aux2, *result = NULL, *result_aux;
 
 	while (1){
 		aux2 = list2;

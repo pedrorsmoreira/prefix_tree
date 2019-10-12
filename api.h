@@ -1,10 +1,20 @@
+/* Prevent multiple inclusions                                      */
+#ifndef API
+#define API
 
-struct node* PrefixTree (char* filename);
+#include "node.h"
+#include "fifo.h"
+#include "utils.h"
 
-struct node* InsertPrefix (struct node* root, char prefix[], size_t nextHop);
+Node* PrefixTree (char* filename);
 
-size_t LookUp (struct node* root, char addr[]);
+Node* InsertPrefix (Node* root, char prefix[], size_t nextHop);
 
-void PrintTable (struct node* root);
+size_t LookUp (Node* root, char addr[]);
 
-struct node* DeletePrefix (struct node* root, char* prefix);
+void PrintTable (Node* root);
+
+Node* DeletePrefix (Node* root, char* prefix);
+
+/* End if: Protect multiple inclusions                              */
+#endif

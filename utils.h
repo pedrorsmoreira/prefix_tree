@@ -1,6 +1,17 @@
+/* Prevent multiple inclusions                                      */
+#ifndef UTILS
+#define UTILS
 
-void updateDeletingVariables (int* auxToStartDeleting, int value, struct node** nodeToStartDeleting, struct node* pointer);
+#include "node.h"
+#include "list.h"
 
-struct node* PassThree (struct node* aux, int nextHop);
+void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToStartDeleting, Node* pointer);
 
-struct node* PassOneTwo (struct node* root);
+Node* PassOneTwo (Node* root);
+
+bool search (struct intList* hopsList, int value);
+
+Node* PassThree (Node* aux, int nextHop);
+
+/* End if: Protect multiple inclusions                              */
+#endif

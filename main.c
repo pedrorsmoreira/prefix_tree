@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-#include "node.h"
+#include "api.h"
 
 void print_usage(char*);
 
@@ -26,7 +25,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	struct node* root = PrefixTree (filename);
+	Node* root = PrefixTree (filename);
 	PrintTable(root);
 
 	printf("Prefix %s Next-hop: %d\n", "11010011", LookUp (root, "11010011"));

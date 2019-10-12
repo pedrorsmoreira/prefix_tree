@@ -1,8 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "fifo.h"
+
 struct fifo
 {
 	char prefix [16];
-	struct node * node;
-	struct fifo * next;
+	Node* node;
+	struct fifo* next;
 };
 
 struct fifoTips
@@ -11,18 +17,16 @@ struct fifoTips
 	struct fifo * tail;
 };
 
-
-struct fifoTips tips;
-
+FifoTips tips;
 
 bool isEmpty ()
 {
 	return (tips.head == NULL);
 }
 
-void put (char prefix[16], struct node * node)
+void put (char prefix[16], Node* node)
 {
-	struct fifo * element = (struct fifo *)malloc(sizeof(struct fifo));
+	Fifo * element = (struct fifo *)malloc(sizeof(struct fifo));
 	strcpy(element->prefix, prefix);
 	element->node = node;
 	element->next = NULL;
@@ -37,9 +41,9 @@ void put (char prefix[16], struct node * node)
 	}
 }
 
-struct fifo * get ()
+Fifo * get ()
 {
-	struct fifo * ret = tips.head;
+	Fifo * ret = tips.head;
 	tips.head = tips.head->next;
 	return ret;
 }

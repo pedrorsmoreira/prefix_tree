@@ -1,4 +1,12 @@
-struct node* PrefixTree (char* filename)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "api.h"
+
+extern FifoTips tips;
+
+Node* PrefixTree (char* filename)
 {
 	FILE *fp = fopen (filename, "r");
 	if (fp == NULL)
@@ -7,7 +15,7 @@ struct node* PrefixTree (char* filename)
 		exit(1);
 	}
 
-	struct node *root = NULL;
+	Node* root = NULL;
 
 	char line[128]; /* maximum line size */
 
@@ -38,7 +46,7 @@ struct node* PrefixTree (char* filename)
 	return root;
 }
 
-struct node* InsertPrefix (struct node * root, char prefix[], size_t nextHop)
+Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 {
 	if (root == NULL)
 	{
@@ -46,7 +54,7 @@ struct node* InsertPrefix (struct node * root, char prefix[], size_t nextHop)
 		return root;
 	}
 
-	struct node* aux = root;
+	Node* aux = root;
 
 	for (int i = 0; i < strlen(prefix); i++)
 	{
@@ -71,7 +79,7 @@ struct node* InsertPrefix (struct node * root, char prefix[], size_t nextHop)
 	return root
 ;}
 
-size_t LookUp (struct node * root, char addr[])
+size_t LookUp (Node* root, char addr[])
 {
 	if (root == NULL)
 	{
@@ -97,7 +105,7 @@ size_t LookUp (struct node * root, char addr[])
 	return nextHop;
 }
 
-void PrintTable (struct node * root)
+void PrintTable (Node* root)
 {
 	if (root == NULL) 
 		printf("Empty Tree\n");
@@ -106,7 +114,7 @@ void PrintTable (struct node * root)
 	put ("", root);
 	
 	do {
-		struct fifo * element = get();
+		Fifo * element = get();
 		if (element->node->nextHop != 0)
 			printf("||  %s  ||  %zu  ||\n", element->prefix, element->node->nextHop);
 
@@ -129,12 +137,12 @@ void PrintTable (struct node * root)
 	return;
 }
 
-struct node* DeletePrefix (struct node* root, char prefix[])
+Node* DeletePrefix (Node* root, char prefix[])
 {
-	struct node* aux = root;
+	Node* aux = root;
 
 	int auxToStartDeleting = 2;
-	struct node* nodeToStartDeleting = NULL;
+	Node* nodeToStartDeleting = NULL;
 
 	if (root == NULL)
 	{
@@ -256,7 +264,7 @@ struct node* DeletePrefix (struct node* root, char prefix[])
 	return root;
 }
 
-struct node* CompressTree (struct node* root)
+Node* CompressTree (Node* root)
 {
 	root = PassOneTwo (root);
 
