@@ -238,6 +238,8 @@ Node* CompressTree (Node* root)
 {
 	root = PassOneTwo (root);
 
+	printf("\n\n---------- ACABOU PASSO 1 ----------\n\n");
+
 	root->nextHop = root->hopsList->hop;
 
 	root->left = PassThree (root->left, root->nextHop);

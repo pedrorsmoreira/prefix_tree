@@ -5,9 +5,9 @@
 struct node  
 { 
 		size_t nextHop;
-		struct node *left; 
-		struct node *right;
-		struct intList * hopsList;
+		struct node* left; 
+		struct node* right;
+		struct intList* hopsList;
 };
 
 typedef struct node Node;

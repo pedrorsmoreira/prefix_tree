@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
 	printf("\n");
 
-	Node* CompressTree (Node* root);
+	root = CompressTree (root);
 
 	PrintTable(root);
 
