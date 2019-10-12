@@ -60,12 +60,14 @@ Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 
 			aux = aux->left;
 		}
-		else {
+		else if (prefix[i] == '1'){
 			if (aux->right == NULL)
 				aux->right = newNode(0);
 
 			aux = aux->right;
 		}
+		else
+			return NULL;
 	}
 
 	aux->nextHop = nextHop;
