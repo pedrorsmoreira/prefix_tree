@@ -2,8 +2,6 @@
 #include <stdio.h>
 
 #include "node.h"
-
-// Functions
 	
 /* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */

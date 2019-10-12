@@ -5,7 +5,7 @@
 #include "node.h"
 #include "list.h"
 
-void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToStartDeleting, Node* pointer);
+void updateDeletingVariables (int* auxToStartDeleting, int value, struct node** nodeToStartDeleting, struct node* pointer);
 
 int getDigits(int h);
 

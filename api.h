@@ -16,5 +16,7 @@ void PrintTable (Node* root);
 
 Node* DeletePrefix (Node* root, char* prefix);
 
+Node* CompressTree (Node* root);
+
 /* End if: Protect multiple inclusions                              */
 #endif
