@@ -116,7 +116,7 @@ void PrintTable (Node* root)
 	do {
 		Fifo * element = get();
 		if (element->node->nextHop != 0)
-			printf("||  %s  ||  %zu  ||\n", element->prefix, element->node->nextHop);
+			print(element->prefix, element->node->nextHop);
 
 		if (element->node->left != NULL)
 		{

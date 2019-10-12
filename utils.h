@@ -7,9 +7,13 @@
 
 void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToStartDeleting, Node* pointer);
 
-Node* PassOneTwo (Node* root);
+int getDigits(int h);
+
+void print(char p[16], int h);
 
 bool search (struct intList* hopsList, int value);
+
+Node* PassOneTwo (Node* root);
 
 Node* PassThree (Node* aux, int nextHop);
 
