@@ -24,19 +24,12 @@ Node* PrefixTree (char* filename)
 		char *token = strtok (line, " ");
 		char *token2 = strtok (NULL, " ");
 
-		/*
-		printf("token: %s\n", token);
-		printf("token2: %s\n", token2);
-		*/
-
 		if ((token == NULL) && (token2 == NULL)) {
 			printf("Input file in the wrong structure\n");
 			exit(1);
 		}
 
 		root = InsertPrefix (root, token, atoi(token2));
-
-		//printf("next line\n\n");
 	}
 
 	fclose (fp);
@@ -203,10 +196,6 @@ Node* DeletePrefix (Node* root, char prefix[])
 		}
 	}
 
-	//printf("aux->nextHop: %d\n", aux->nextHop);
-	//printf("nodeToStartDeleting->nextHop: %d\n", nodeToStartDeleting->nextHop);
-	//printf("nodeToStartDeleting->right->nextHop: %d\n", nodeToStartDeleting->right->nextHop);
-
 	// Deleting part
 	if (nodeToStartDeleting == NULL)
 		aux->nextHop = 0;
@@ -236,10 +225,10 @@ Node* DeletePrefix (Node* root, char prefix[])
 
 Node* CompressTree (Node* root)
 {
+	// Pass One and Two
 	root = PassOneTwo (root);
 
-	printf("\n\n---------- ACABOU PASSO 1 ----------\n\n");
-
+	// Pass Three
 	root->nextHop = root->hopsList->hop;
 
 	root->left = PassThree (root->left, root->nextHop);

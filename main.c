@@ -29,32 +29,17 @@ int main(int argc, char *argv[])
 	Node* root = PrefixTree (filename);
 	PrintTable(root);
 
-	/*
 	printf("Prefix %s Next-hop: %d\n", "11010011", LookUp (root, "11010011"));
 	printf("Prefix %s Next-hop: %d\n", "11000011", LookUp (root, "11000011"));
-
-	printf("\n");
-
-	//DELETE 010
-	printf("Prefix %s Next-hop: %d\n", "010100110000", LookUp (root, "010100110000"));
-	root = DeletePrefix (root, "010");
-	PrintTable(root);
-	printf("Prefix %s Next-hop: %d\n", "010100110000", LookUp (root, "010100110000"));
-
-	printf("\n");
-
-	//DELETE 1001
-	printf("Prefix %s Next-hop: %d\n", "100100001111", LookUp (root, "100100001111"));
-	root = DeletePrefix (root, "1001");
-	PrintTable(root);
-	printf("Prefix %s Next-hop: %d\n", "100100001111", LookUp (root, "100100001111"));
-	*/
 
 	printf("\n");
 
 	root = CompressTree (root);
 
 	PrintTable(root);
+
+	printf("Prefix %s Next-hop: %d\n", "11010011", LookUp (root, "11010011"));
+	printf("Prefix %s Next-hop: %d\n", "11000011", LookUp (root, "11000011"));
 
 	return 0;  
 }
