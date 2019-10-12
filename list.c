@@ -23,7 +23,8 @@ void emptyIntList(IntList* list)
 	}
 }
 
-IntList * unite(IntList * l1, IntList * l2){
+IntList* unite(IntList* l1, IntList* l2)
+{
 	if (l1 == NULL)
 		return NULL;
 
@@ -48,7 +49,7 @@ IntList* intersect(IntList* list1, IntList* list2)
 {
 	IntList* aux1 = list1, *aux2, *result = NULL, *result_aux;
 
-	while (1) {//intersection
+	while (1) {
 		aux2 = list2;
 		while (aux2 != NULL) {
 			if(aux1->hop == aux2->hop) {
@@ -67,7 +68,6 @@ IntList* intersect(IntList* list1, IntList* list2)
 		else aux1 = aux1->next;
 	}
 
-	//union
 	if (result == NULL)
 		result = unite(list1, list2);
 
