@@ -5,13 +5,13 @@
 #include "node.h"
 #include "list.h"
 
-void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToStartDeleting, Node* pointer);
+void updateDeletingVariables (int* auxToStartDeleting, int value, struct node** nodeToStartDeleting, struct node* pointer);
 
-Node* PassOneTwo (Node* root);
+struct node* PassOneTwo (struct node* root);
 
 bool search (struct intList* hopsList, int value);
 
-Node* PassThree (Node* aux, int nextHop);
+struct node* PassThree (struct node* aux, int nextHop);
 
 /* End if: Protect multiple inclusions                              */
 #endif

@@ -4,6 +4,12 @@
 
 #include "node.h"
 
+struct intList 
+{
+	int hop;
+	struct intList * next;
+};
+
 typedef struct intList IntList;
 
 IntList* newIntList (size_t value);

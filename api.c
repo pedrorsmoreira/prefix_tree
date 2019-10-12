@@ -9,8 +9,7 @@ extern FifoTips tips;
 Node* PrefixTree (char* filename)
 {
 	FILE *fp = fopen (filename, "r");
-	if (fp == NULL)
-	{
+	if (fp == NULL) {
 		perror (filename);
 		exit(1);
 	}
@@ -19,8 +18,8 @@ Node* PrefixTree (char* filename)
 
 	char line[128]; /* maximum line size */
 
-	while (fgets (line, sizeof line, fp) != NULL) // read a line
-	{
+	// read a line
+	while (fgets (line, sizeof line, fp) != NULL) { 
 		// Returns first token
 		char *token = strtok (line, " ");
 		char *token2 = strtok (NULL, " ");
@@ -30,8 +29,7 @@ Node* PrefixTree (char* filename)
 		printf("token2: %s\n", token2);
 		*/
 
-		if ((token == NULL) && (token2 == NULL))
-		{
+		if ((token == NULL) && (token2 == NULL)) {
 			printf("Input file in the wrong structure\n");
 			exit(1);
 		}
@@ -48,25 +46,21 @@ Node* PrefixTree (char* filename)
 
 Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 {
-	if (root == NULL)
-	{
+	if (root == NULL) {
 		root = newNode(nextHop);
 		return root;
 	}
 
 	Node* aux = root;
 
-	for (int i = 0; i < strlen(prefix); i++)
-	{
-		if (prefix[i] == '0')
-		{
+	for (int i = 0; i < strlen(prefix); i++) {
+		if (prefix[i] == '0') {
 			if (aux->left == NULL)
 				aux->left = newNode(0);
 
 			aux = aux->left;
 		}
-		else
-		{
+		else {
 			if (aux->right == NULL)
 				aux->right = newNode(0);
 
@@ -81,15 +75,13 @@ Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 
 size_t LookUp (Node* root, char addr[])
 {
-	if (root == NULL)
-	{
+	if (root == NULL) {
 		printf("Empty Tree\n");
 		return 0;
 	}
 
 	size_t nextHop = root->nextHop;
-	for (int i = 0; i < strlen(addr); i++)
-	{	
+	for (int i = 0; i < strlen(addr); i++) {	
 		if (addr[i] == '0')
 			root = root->left;
 		else
@@ -118,17 +110,15 @@ void PrintTable (Node* root)
 		if (element->node->nextHop != 0)
 			printf("||  %s  ||  %zu  ||\n", element->prefix, element->node->nextHop);
 
-		if (element->node->left != NULL)
-		{
+		if (element->node->left != NULL) {
 			strcat(element->prefix, "0");
 			put (element->prefix, element->node->left);
-			if (element->node->right != NULL){
+			if (element->node->right != NULL) {
 				element->prefix[strlen(element->prefix)-1] = '1';
 				put (element->prefix, element->node->right);
 			}
 		}
-		else if (element->node->right != NULL)
-		{
+		else if (element->node->right != NULL) {
 			strcat(element->prefix, "1");
 			put (element->prefix, element->node->right);
 		}
@@ -144,15 +134,13 @@ Node* DeletePrefix (Node* root, char prefix[])
 	int auxToStartDeleting = 2;
 	Node* nodeToStartDeleting = NULL;
 
-	if (root == NULL)
-	{
+	if (root == NULL) {
 		printf("Empty tree\n");
 		return root;
 	}
 
 	// NON SENSE
-	if (prefix[0] == 'e')
-	{
+	if (prefix[0] == 'e') {
 		if ((root->left == NULL) && (root->right == NULL))
 			return NULL;
 
@@ -161,31 +149,24 @@ Node* DeletePrefix (Node* root, char prefix[])
 		return root;
 	}
 
-	for (int i = 0; i < strlen(prefix); i++)
-	{
-		if (prefix[i] == '0')
-		{
-			if (aux->left == NULL)
-			{
+	for (int i = 0; i < strlen(prefix); i++) {
+		if (prefix[i] == '0') {
+			if (aux->left == NULL) {
 				printf("Don't exist that prefix in the tree\n");
 				return root;
 			}
-			else
-			{
+			else {
 				if ((aux->left->left != NULL) && (aux->left->right != NULL))
 					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
-				else if ((aux->left->left != NULL) || (aux->left->right != NULL))
-				{
-					if (aux->left->nextHop == 0)
-					{
+				else if ((aux->left->left != NULL) || (aux->left->right != NULL)) {
+					if (aux->left->nextHop == 0) {
 						if (nodeToStartDeleting == NULL)
 							updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
 					}
 					else
 						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
-				else
-				{
+				else {
 					if (nodeToStartDeleting == NULL)
 						updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
 				}
@@ -193,29 +174,23 @@ Node* DeletePrefix (Node* root, char prefix[])
 				aux = aux->left;
 			}
 		}
-		else if (prefix[i] == '1')
-		{
-			if (aux->right == NULL)
-			{
+		else if (prefix[i] == '1') {
+			if (aux->right == NULL) {
 				printf("Don't exist that prefix in the tree\n");
 				return root;
 			}
-			else
-			{
+			else {
 				if ((aux->right->left != NULL) && (aux->right->right != NULL))
 					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
-				else if ((aux->right->left != NULL) || (aux->right->right != NULL))
-				{
-					if (aux->right->nextHop == 0)
-					{
+				else if ((aux->right->left != NULL) || (aux->right->right != NULL)) {
+					if (aux->right->nextHop == 0) {
 						if (nodeToStartDeleting == NULL)
 							updateDeletingVariables (&auxToStartDeleting, 1, &nodeToStartDeleting, aux);
 					}
 					else
 						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
-				else
-				{
+				else {
 					if (nodeToStartDeleting == NULL)
 						updateDeletingVariables (&auxToStartDeleting, 1, &nodeToStartDeleting, aux);
 				}
@@ -223,8 +198,7 @@ Node* DeletePrefix (Node* root, char prefix[])
 				aux = aux->right;
 			}
 		}
-		else
-		{
+		else {
 			printf("Prefix invalid\n");
 		}
 	}
@@ -236,21 +210,17 @@ Node* DeletePrefix (Node* root, char prefix[])
 	// Deleting part
 	if (nodeToStartDeleting == NULL)
 		aux->nextHop = 0;
-	else
-	{
-		if (auxToStartDeleting == 0)
-		{
+	else {
+		if (auxToStartDeleting == 0) {
 			aux = nodeToStartDeleting->left;
 			nodeToStartDeleting->left = NULL;
 		}
-		else
-		{
+		else {
 			aux = nodeToStartDeleting->right;
 			nodeToStartDeleting->right = NULL;
 		}
 
-		while(aux != NULL)
-		{
+		while(aux != NULL) {
 			if(aux->left != NULL)
 				nodeToStartDeleting = aux->left;
 			else

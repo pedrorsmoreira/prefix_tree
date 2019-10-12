@@ -13,18 +13,18 @@ void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToS
 Node* PassOneTwo (Node* root)
 {
 	//step 1
-	if (root->left == NULL){
-		if (root->right == NULL){ //leaf
+	if (root->left == NULL) {
+		if (root->right == NULL) { //leaf
 			root->hopsList = newIntList(root->nextHop);
 			return root;
 		}
-		else{ //1 right child
+		else { //1 right child
 			root->left = newNode(root->nextHop);
 			if (root->right->nextHop == 0)
 				root->right->nextHop = root->nextHop;
 		}
 	}
-	else if (root->right == NULL){ //1 left child
+	else if (root->right == NULL) { //1 left child
 		root->right = newNode(root->nextHop);
 		if (root->left->nextHop == 0)
 			root->left->nextHop = root->nextHop;
@@ -69,27 +69,30 @@ Node* PassThree (Node* aux, int nextHop)
 {
 	int value = 0;
 
-	if (search (aux->hopsList, nextHop))
-	{
+	if (search (aux->hopsList, nextHop)) {
 		value = nextHop;
 		aux->nextHop = 0;
 	}
-	else
-	{
-		aux->nextHop = aux->hopsList->nextHop;
+	else {
+		aux->nextHop = aux->hopsList->hop;
 		value = aux->nextHop;
 	}
 
-	if (aux->left != NULL)
-		aux->left = PassThree (aux->left, value);
-	if (aux->right != NULL)
-		aux->right = PassThree (aux->right, value);
-
-	if (aux->nextHop == 0)
-	{
-		free(aux);
-		return NULL;
+	if (aux->left == NULL) {
+		if (aux->right == NULL) {
+			if (aux->nextHop == 0) {
+				free(aux);
+				return NULL;
+			}
+		}
+		else
+			aux->right = PassThree (aux->right, value);
 	}
-	else
-		return aux;
+	else {
+		aux->left = PassThree (aux->left, value);
+		if (aux->right != NULL)
+			aux->right = PassThree (aux->right, value);
+	}
+
+	return aux;
 }

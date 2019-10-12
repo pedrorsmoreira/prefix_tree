@@ -6,6 +6,19 @@
 
 #include "node.h"
 
+struct fifo
+{
+	char prefix [16];
+	Node* node;
+	struct fifo* next;
+};
+
+struct fifoTips
+{
+	struct fifo * head;
+	struct fifo * tail;
+};
+
 typedef struct fifo Fifo;
 
 typedef struct fifoTips FifoTips;

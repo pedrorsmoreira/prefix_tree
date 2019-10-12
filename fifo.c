@@ -4,19 +4,6 @@
 
 #include "fifo.h"
 
-struct fifo
-{
-	char prefix [16];
-	Node* node;
-	struct fifo* next;
-};
-
-struct fifoTips
-{
-	struct fifo * head;
-	struct fifo * tail;
-};
-
 FifoTips tips;
 
 bool isEmpty ()
@@ -31,11 +18,11 @@ void put (char prefix[16], Node* node)
 	element->node = node;
 	element->next = NULL;
 
-	if (tips.head == NULL){
+	if (tips.head == NULL) {
 		tips.tail = element;
 		tips.head = element;
 	}
-	else{
+	else {
 		tips.tail->next = element;
 		tips.tail = element;
 	}
