@@ -148,7 +148,7 @@ Node* DeletePrefix (Node* root, char prefix[])
 		return root;
 	}
 
-	for (int i = 0; i < strlen(prefix); i++) {
+	for (int i = 0; i < strlen(prefix); i++) { printf("LALALALAL %c\n", prefix[i]);
 		if (prefix[i] == '0') {
 			if (aux->left == NULL) {
 				printf("Don't exist that prefix in the tree\n");
@@ -199,6 +199,7 @@ Node* DeletePrefix (Node* root, char prefix[])
 		}
 		else {
 			printf("Prefix invalid\n");
+			return root;
 		}
 	}
 

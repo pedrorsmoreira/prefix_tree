@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 #include "api.h"
@@ -33,7 +34,6 @@ int main(int argc, char *argv[])
 
 	//PRIMEIRA TABELA
 	Node* root = PrefixTree (filename);
-	PrintTable(root);
 
 	while(1){
 		//read the action from stdin and perform it
@@ -55,45 +55,55 @@ int main(int argc, char *argv[])
 					perror("fgets: ");
 					exit(-1);
 				}
+				prefix[strlen(prefix)-1] = '\0';
 				printf("Write the nexthop:");	
 				if (fgets(nexthop, 16, stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
 				}
-				Node* r = InsertPrefix(root, prefix, atoi(nexthop));
-				if (r != NULL) root = r;
-				else printf("invalid input.\n---\n\n");
+				nexthop[strlen(nexthop)-1] = '\0';
+				root = InsertPrefix(root, prefix, atoi(nexthop));
+
+				printf("\n---\n\n");
 
 				break;
 			}
 			else if ((order == 'P') || (order == 'p')){
 				PrintTable(root);
+				printf("\n---\n\n");
 				break;
 			}
-			else if ((order == 'W') || (order == 'w')){
-				//read the region of the action from stdin
-				region = read_region();
+			else if ((order == 'S') || (order == 's')){
+				printf("Write the prefix where to Look up for the next hop:");	
+				if (fgets(prefix, 16, stdin) == NULL){
+					perror("fgets: ");
+					exit(-1);
+				}
+				printf("next hop: %d.\n \n---\n\n", LookUp(root, prefix));
 				
-				nbytes = clipboard_wait(fd, region, message, MESSAGE_SIZE);
-				if (nbytes == 0)	printf("paste (wait) failed\n---\n");
-				else	printf("Received %s\n (%d bytes pasted (wait))\n---\n", message, nbytes);
-				
+				break;
+			}
+			else if ((order == 'D') || (order == 'd')){
+				printf("Write the prefix to be deleted:");	
+				if (fgets(prefix, 16, stdin) == NULL){
+					perror("fgets: ");
+					exit(-1);
+				}
+				prefix[strlen(prefix)-1] = '\0';
+				root = DeletePrefix (root, prefix);
+
+				printf("\n---\n\n");
+
+				break;
+			}
+			else if ((order == 'C') || (order == 'c')){
+				root = CompressTree(root);
+				printf("Tree compressed.\n---\n\n");
 				break;
 			}
 			printf("Option not available\n---\n");
 		}
 	}
-
-	//root = CompressTree (root);
-
-	//PrintTable(root);
-
-	root = DeletePrefix (root, "e");
-
-	PrintTable(root);
-
-	printf("Prefix %s Next-hop: %d\n", "11010011", LookUp (root, "11010011"));
-	printf("Prefix %s Next-hop: %d\n", "11000011", LookUp (root, "11000011"));
 
 	return 0;  
 }
