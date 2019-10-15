@@ -11,7 +11,7 @@ bool isEmpty ()
 	return (tips.head == NULL);
 }
 
-void put (char prefix[16], Node* node)
+void put (char prefix[16+1], Node* node)
 {
 	Fifo * element = (struct fifo *)malloc(sizeof(struct fifo));
 	strcpy(element->prefix, prefix);

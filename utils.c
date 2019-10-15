@@ -18,20 +18,22 @@ int getDigits(int h) {
 		h = h/10;
 		size++;
 	}
+	return size;
 }
 
-void print(char p[16], int h){
+void print(char p[16+1], int h){
 	printf("|| ");
-	for (int i = 0;  i < (int) floor( (16 - strlen(p) )/ (double) 2); i++){
+	int size = strlen(p);
+	for (int i = 0;  i < (int) floor( (16+1 - strlen(p) )/ (double) 2); i++){
 		printf(" ");
 	}
 	printf("%s", p);
-	for (int i = 0;  i < (int) ceil( (16 - strlen(p) )/ (double) 2); i++){
+	for (int i = 0;  i < (int) ceil( (16+1 - strlen(p) )/ (double) 2); i++){
 		printf(" ");
 	}
 	printf(" || ");
 
-	int size = getDigits(h);
+	size = getDigits(h);
 	for (int i = 0;  i < (int) floor((8 - size )/ (double) 2); i++){
 		printf(" ");
 	}

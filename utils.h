@@ -9,7 +9,7 @@ void updateDeletingVariables (int* auxToStartDeleting, int value, Node** nodeToS
 
 int getDigits(int h);
 
-void print(char p[16], int h);
+void print(char p[16+1], int h);
 
 struct node* PassOneTwo (Node* root);
 

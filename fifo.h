@@ -8,7 +8,7 @@
 
 struct fifo
 {
-	char prefix [16];
+	char prefix [16+1];
 	Node* node;
 	struct fifo* next;
 };
@@ -25,7 +25,7 @@ typedef struct fifoTips FifoTips;
 
 bool isEmpty ();
 
-void put (char prefix[16], Node* node);
+void put (char prefix[16+1], Node* node);
 
 Fifo * get ();
 
