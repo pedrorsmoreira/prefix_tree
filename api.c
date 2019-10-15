@@ -39,18 +39,18 @@ Node* PrefixTree (char* filename)
 
 Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 {
-	if (root == NULL) {
-		if(prefix[0] == 'e') {
-			root = newNode(nextHop);
-			return root;
-		}
-		else
-			root = newNode(0);
+	int length = strlen(prefix);
+
+	if (root == NULL)
+		root = newNode(0);
+
+	if (length == 1 && prefix[0] == 'e'){
+		root->nextHop = nextHop;
+		return root;
 	}
 
 	Node* aux = root;
-
-	for (int i = 0; i < strlen(prefix); i++) {
+	for (int i = 0; i < length; i++) {
 		if (prefix[i] == '0') {
 			if (aux->left == NULL)
 				aux->left = newNode(0);
@@ -64,7 +64,7 @@ Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 			aux = aux->right;
 		}
 		else
-			return NULL;
+			continue;
 	}
 
 	aux->nextHop = nextHop;
