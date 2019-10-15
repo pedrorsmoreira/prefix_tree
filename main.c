@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	while(1){
 		//read the action from stdin and perform it
 		while (1){
-		char order, aux[50], prefix[16+2], nexthop[16+2];
+		char order, aux[50], prefix[50], nexthop[50];
 			printf("(Enter [Q] to quit) \nIntroduce the action, Print [P], Search [S], Insert [I], Delete [D] or Compress [C]:");
 			if (fgets(aux, sizeof(aux), stdin) == NULL){
 				perror("fgets: ");
@@ -51,13 +51,13 @@ int main(int argc, char *argv[])
 
 			else if ((order == 'i') || (order == 'I')){
 				printf("Write the prefix to be inserted:");	
-				if (fgets(prefix, 16+2, stdin) == NULL){
+				if (fgets(prefix, 50, stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
 				}
 				prefix[strlen(prefix)-1] = '\0';
 				printf("Write the nexthop:");	
-				if (fgets(nexthop, 16+2, stdin) == NULL){
+				if (fgets(nexthop, 50, stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
 				}
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 			}
 			else if ((order == 'S') || (order == 's')){
 				printf("Write the prefix where to Look up for the next hop:");	
-				if (fgets(prefix, 16+2, stdin) == NULL){
+				if (fgets(prefix, 50, stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
 				}
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 			}
 			else if ((order == 'D') || (order == 'd')){
 				printf("Write the prefix to be deleted:");	
-				if (fgets(prefix, 16+2, stdin) == NULL){
+				if (fgets(prefix, 50, stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
 				}
