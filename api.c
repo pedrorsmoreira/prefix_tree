@@ -233,6 +233,9 @@ Node* DeletePrefix (Node* root, char prefix[])
 
 Node* CompressTree (Node* root)
 {
+	if (root->nextHop == 0)
+		root->nextHop = -1;
+
 	// Pass One and Two
 	root = PassOneTwo (root);
 
