@@ -12,7 +12,7 @@ struct intList
 
 typedef struct intList IntList;
 
-IntList* newIntList (size_t value);
+IntList* newIntList (int value);
 
 void emptyIntList(IntList* list);
 

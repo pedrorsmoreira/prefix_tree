@@ -4,7 +4,7 @@
 
 struct node  
 { 
-		size_t nextHop;
+		int nextHop;
 		struct node* left; 
 		struct node* right;
 		struct intList* hopsList;
@@ -12,7 +12,7 @@ struct node
 
 typedef struct node Node;
 
-Node* newNode (size_t nextHop);
+Node* newNode (int nextHop);
 
 /* End if: Protect multiple inclusions                              */
 #endif

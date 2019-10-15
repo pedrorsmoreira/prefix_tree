@@ -4,7 +4,7 @@
 #include "list.h"
 
 
-IntList* newIntList (size_t value) 
+IntList* newIntList (int value) 
 { 
 	// Allocate memory for new node  
 	IntList* list = (IntList*) malloc (sizeof(IntList)); 
