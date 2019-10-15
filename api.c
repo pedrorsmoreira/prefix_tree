@@ -44,7 +44,7 @@ Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 	if (root == NULL)
 		root = newNode(0);
 
-	if (length == 1 && prefix[0] == 'e'){
+	if (length == 1 && prefix[0] == 'e' || prefix == ""){
 		root->nextHop = nextHop;
 		return root;
 	}
@@ -57,14 +57,12 @@ Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 
 			aux = aux->left;
 		}
-		else if (prefix[i] == '1'){
+		else {
 			if (aux->right == NULL)
 				aux->right = newNode(0);
 
 			aux = aux->right;
 		}
-		else
-			continue;
 	}
 
 	aux->nextHop = nextHop;
@@ -109,6 +107,8 @@ size_t LookUp (Node* root, char addr[])
 		printf("Empty Tree\n");
 		return 0;
 	}
+	if (addr == "e")
+		addr = "";
 
 	size_t nextHop = root->nextHop;
 	for (int i = 0; i < strlen(addr); i++) {	
