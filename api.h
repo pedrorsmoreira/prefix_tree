@@ -10,9 +10,9 @@ Node* PrefixTree (char* filename);
 
 Node* InsertPrefix (Node* root, char prefix[], size_t nextHop);
 
-size_t LookUp (Node* root, char addr[]);
-
 void PrintTable (Node* root);
+
+size_t LookUp (Node* root, char addr[]);
 
 Node* DeletePrefix (Node* root, char* prefix);
 

@@ -76,7 +76,7 @@ Node* PassOneTwo (Node* root)
 	struct intList * hopsList2 = PassOneTwo(root->right)->hopsList;
 
 	//step2
-	root->hopsList = intersect(hopsList1, hopsList2);
+	root->hopsList = intersect_union (hopsList1, hopsList2);
 
 	return root;
 }
