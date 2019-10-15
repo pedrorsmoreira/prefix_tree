@@ -47,7 +47,7 @@ IntList* unite(IntList* l1, IntList* l2)
 	return head;
 }
 
-IntList* intersect(IntList* list1, IntList* list2)
+IntList* intersect_union(IntList* list1, IntList* list2)
 {
 	IntList* aux1 = list1, *aux2, *result = NULL, *result_aux;
 

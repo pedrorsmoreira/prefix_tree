@@ -69,31 +69,7 @@ Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
 
 	aux->nextHop = nextHop;
 	
-	return root
-;}
-
-size_t LookUp (Node* root, char addr[])
-{
-	if (root == NULL) {
-		printf("Empty Tree\n");
-		return 0;
-	}
-
-	size_t nextHop = root->nextHop;
-	for (int i = 0; i < strlen(addr); i++) {	
-		if (addr[i] == '0')
-			root = root->left;
-		else
-			root = root->right;
-		
-		if (root == NULL)
-			break;
-		else
-			if (root->nextHop > 0)
-				nextHop = root->nextHop;
-	}
-
-	return nextHop;
+	return root;
 }
 
 void PrintTable (Node* root)
@@ -123,7 +99,32 @@ void PrintTable (Node* root)
 		}
 		free (element);
 	} while (!isEmpty());
+	
 	return;
+}
+
+size_t LookUp (Node* root, char addr[])
+{
+	if (root == NULL) {
+		printf("Empty Tree\n");
+		return 0;
+	}
+
+	size_t nextHop = root->nextHop;
+	for (int i = 0; i < strlen(addr); i++) {	
+		if (addr[i] == '0')
+			root = root->left;
+		else
+			root = root->right;
+		
+		if (root == NULL)
+			break;
+		else
+			if (root->nextHop > 0)
+				nextHop = root->nextHop;
+	}
+
+	return nextHop;
 }
 
 Node* DeletePrefix (Node* root, char prefix[])
@@ -148,7 +149,7 @@ Node* DeletePrefix (Node* root, char prefix[])
 		return root;
 	}
 
-	for (int i = 0; i < strlen(prefix); i++) { printf("LALALALAL %c\n", prefix[i]);
+	for (int i = 0; i < strlen(prefix); i++) {
 		if (prefix[i] == '0') {
 			if (aux->left == NULL) {
 				printf("Don't exist that prefix in the tree\n");
@@ -238,6 +239,10 @@ Node* CompressTree (Node* root)
 	// Pass Three
 	root->nextHop = root->hopsList->hop;
 
+	emptyIntList(root->hopsList);
+
 	root->left = PassThree (root->left, root->nextHop);
 	root->right = PassThree (root->right, root->nextHop);
+
+	return root;
 }
