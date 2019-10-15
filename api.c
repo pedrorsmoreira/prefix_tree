@@ -103,12 +103,14 @@ void PrintTable (Node* root)
 
 int LookUp (Node* root, char addr[])
 {
+	if (strlen(addr) != 16) return -1;
+
 	if (root == NULL) {
 		printf("Empty Tree\n");
 		return 0;
 	}
-	if (addr == "e")
-		addr = "";
+	//if (addr == "e")
+	//	addr = "";
 
 	int nextHop = root->nextHop;
 	for (int i = 0; i < strlen(addr); i++) {	
@@ -122,6 +124,8 @@ int LookUp (Node* root, char addr[])
 		else
 			if (root->nextHop > 0)
 				nextHop = root->nextHop;
+			else if (root->nextHop == -1)
+				nextHop = 0;
 	}
 
 	return nextHop;
