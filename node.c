@@ -5,7 +5,7 @@
 	
 /* newNode() allocates a new node with the given prefix and NULL left and  
 	 right pointers. */
-Node* newNode (size_t nextHop) 
+Node* newNode (int nextHop) 
 { 
 	// Allocate memory for new node  
 	Node* node = (Node*) malloc (sizeof(Node)); 

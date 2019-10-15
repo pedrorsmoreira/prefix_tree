@@ -8,11 +8,11 @@
 
 Node* PrefixTree (char* filename);
 
-Node* InsertPrefix (Node* root, char prefix[], size_t nextHop);
+Node* InsertPrefix (Node* root, char prefix[], int nextHop);
 
 void PrintTable (Node* root);
 
-size_t LookUp (Node* root, char addr[]);
+int LookUp (Node* root, char addr[]);
 
 Node* DeletePrefix (Node* root, char* prefix);
 

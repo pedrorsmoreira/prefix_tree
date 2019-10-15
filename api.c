@@ -37,7 +37,7 @@ Node* PrefixTree (char* filename)
 	return root;
 }
 
-Node* InsertPrefix (Node* root, char prefix[], size_t nextHop)
+Node* InsertPrefix (Node* root, char prefix[], int nextHop)
 {
 	int length = strlen(prefix);
 
@@ -101,7 +101,7 @@ void PrintTable (Node* root)
 	return;
 }
 
-size_t LookUp (Node* root, char addr[])
+int LookUp (Node* root, char addr[])
 {
 	if (root == NULL) {
 		printf("Empty Tree\n");
@@ -110,7 +110,7 @@ size_t LookUp (Node* root, char addr[])
 	if (addr == "e")
 		addr = "";
 
-	size_t nextHop = root->nextHop;
+	int nextHop = root->nextHop;
 	for (int i = 0; i < strlen(addr); i++) {	
 		if (addr[i] == '0')
 			root = root->left;
