@@ -109,8 +109,6 @@ int LookUp (Node* root, char addr[])
 		printf("Empty Tree\n");
 		return 0;
 	}
-	//if (addr == "e")
-	//	addr = "";
 
 	int nextHop = root->nextHop;
 	for (int i = 0; i < strlen(addr); i++) {	

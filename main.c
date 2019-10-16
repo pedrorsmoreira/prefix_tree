@@ -36,12 +36,12 @@ int main(int argc, char *argv[])
 	Node* root_ = PrefixTree (filename), *Croot, *root;
 	bool isCompressed = false;
 
-	while(1){
+	while(1) {
 		//read the action from stdin and perform it
-		while (1){
+		while (1) {
 		char order, aux[50], prefix[50], nexthop[50];
-			if (isCompressed){
-				printf("(Enter [Q] to quit) \nIntroduce the tree to act on: Non-Compressed [N], Compressed [C]:");
+			if (isCompressed) {
+				printf("(Enter [Q] to quit)\nIntroduce the tree to act on: Non-Compressed [N], Compressed [C]:");
 				if (fgets(aux, sizeof(aux), stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
@@ -53,17 +53,18 @@ int main(int argc, char *argv[])
 					root = root_;
 				else if (order == 'c' || order == 'C')
 					root = Croot;
-				else{
+				else {
 					printf("Option not available\n---\n");
 					continue;
 				}
 				printf("\n---\n\n");
 
-			} else 
+			} 
+			else 
 				root = root_;
 
-			printf("(Enter [Q] to quit) \nIntroduce the action, Print [P], Search [S], Insert [I], Delete [D] or Compress [C]:");
-			if (fgets(aux, sizeof(aux), stdin) == NULL){
+			printf("(Enter [Q] to quit)\nIntroduce the action, Print [P], Search [S], Insert [I], Delete [D] or Compress [C]:");
+			if (fgets(aux, sizeof(aux), stdin) == NULL) {
 				perror("fgets: ");
 				exit(-1);
 			}
@@ -71,7 +72,6 @@ int main(int argc, char *argv[])
 			//perform
 			if ((order == 'q') || (order == 'Q'))
 				return 0;
-
 			else if ((order == 'i') || (order == 'I')){
 				printf("Write the prefix to be inserted:");	
 				if (fgets(prefix, 50, stdin) == NULL){
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 				}
 				prefix[strlen(prefix)-1] = '\0';
 				printf("Write the nexthop:");	
-				if (fgets(nexthop, 50, stdin) == NULL){
+				if (fgets(nexthop, 50, stdin) == NULL) {
 					perror("fgets: ");
 					exit(-1);
 				}
@@ -91,17 +91,18 @@ int main(int argc, char *argv[])
 
 				break;
 			}
-			else if ((order == 'P') || (order == 'p')){
+			else if ((order == 'P') || (order == 'p')) {
 				PrintTable(root);
 				printf("\n---\n\n");
 				break;
 			}
-			else if ((order == 'S') || (order == 's')){
+			else if ((order == 'S') || (order == 's')) {
 				printf("Write the address where to Look up for the next hop:");	
-				if (fgets(prefix, 50, stdin) == NULL){
+				if (fgets(prefix, 50, stdin) == NULL) {
 					perror("fgets: ");
 					exit(-1);
 				}
+				prefix[strlen(prefix)-1] = '\0';
 				int nh = LookUp(root, prefix);
 				if (nh < 0)
 					printf("wrong address.\n \n---\n\n");
@@ -110,9 +111,9 @@ int main(int argc, char *argv[])
 				
 				break;
 			}
-			else if ((order == 'D') || (order == 'd')){
+			else if ((order == 'D') || (order == 'd')) {
 				printf("Write the prefix to be deleted:");	
-				if (fgets(prefix, 50, stdin) == NULL){
+				if (fgets(prefix, 50, stdin) == NULL) {
 					perror("fgets: ");
 					exit(-1);
 				}
@@ -123,9 +124,9 @@ int main(int argc, char *argv[])
 
 				break;
 			}
-			else if ((order == 'C') || (order == 'c')){
-				if (isCompressed){
-					if (root == Croot){
+			else if ((order == 'C') || (order == 'c')) {
+				if (isCompressed) {
+					if (root == Croot) {
 						printf("Tree already compressed.\n---\n\n");
 						break;
 					}
