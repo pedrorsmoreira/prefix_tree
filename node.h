@@ -14,5 +14,7 @@ typedef struct node Node;
 
 Node* newNode (int nextHop);
 
+Node* clone(Node * root, Node * newRoot);
+
 /* End if: Protect multiple inclusions                              */
 #endif

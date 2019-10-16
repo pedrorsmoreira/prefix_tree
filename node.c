@@ -21,3 +21,13 @@ Node* newNode (int nextHop)
 
 	return(node); 
 }
+
+Node* clone(Node * root, Node * newRoot){
+	if (root == NULL)
+		return NULL;
+
+	newRoot = newNode(root->nextHop);
+	newRoot->left = clone(root->left, newRoot->left);
+	newRoot->right = clone(root->right, newRoot->right);
+	return newRoot;
+}

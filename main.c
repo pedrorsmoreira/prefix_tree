@@ -33,12 +33,35 @@ int main(int argc, char *argv[])
 	}
 
 	//PRIMEIRA TABELA
-	Node* root = PrefixTree (filename);
+	Node* root_ = PrefixTree (filename), *Croot, *root;
+	bool isCompressed = false;
 
 	while(1){
 		//read the action from stdin and perform it
 		while (1){
 		char order, aux[50], prefix[50], nexthop[50];
+			if (isCompressed){
+				printf("(Enter [Q] to quit) \nIntroduce the tree to act on: Non-Compressed [N], Compressed [C]:");
+				if (fgets(aux, sizeof(aux), stdin) == NULL){
+					perror("fgets: ");
+					exit(-1);
+				}
+				sscanf(aux, "%c", &order);
+				if ((order == 'q') || (order == 'Q'))
+					return 0;
+				else if (order == 'n' || order == 'N')
+					root = root_;
+				else if (order == 'c' || order == 'C')
+					root = Croot;
+				else{
+					printf("Option not available\n---\n");
+					continue;
+				}
+				printf("\n---\n\n");
+
+			} else 
+				root = root_;
+
 			printf("(Enter [Q] to quit) \nIntroduce the action, Print [P], Search [S], Insert [I], Delete [D] or Compress [C]:");
 			if (fgets(aux, sizeof(aux), stdin) == NULL){
 				perror("fgets: ");
@@ -74,12 +97,16 @@ int main(int argc, char *argv[])
 				break;
 			}
 			else if ((order == 'S') || (order == 's')){
-				printf("Write the prefix where to Look up for the next hop:");	
+				printf("Write the address where to Look up for the next hop:");	
 				if (fgets(prefix, 50, stdin) == NULL){
 					perror("fgets: ");
 					exit(-1);
 				}
-				printf("next hop: %d.\n \n---\n\n", LookUp(root, prefix));
+				int nh = LookUp(root, prefix);
+				if (nh < 0)
+					printf("wrong address.\n \n---\n\n");
+				else
+					printf("next hop: %d.\n \n---\n\n", nh);
 				
 				break;
 			}
@@ -97,7 +124,12 @@ int main(int argc, char *argv[])
 				break;
 			}
 			else if ((order == 'C') || (order == 'c')){
-				root = CompressTree(root);
+				if (isCompressed){
+					printf("Tree already compressed.\n---\n\n");
+					break;
+				}
+				Croot = CompressTree(root);
+				isCompressed = true;
 				printf("Tree compressed.\n---\n\n");
 				break;
 			}

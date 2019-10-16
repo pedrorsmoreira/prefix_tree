@@ -116,8 +116,10 @@ int LookUp (Node* root, char addr[])
 	for (int i = 0; i < strlen(addr); i++) {	
 		if (addr[i] == '0')
 			root = root->left;
-		else
+		else if (addr[i] == '1')
 			root = root->right;
+		else
+			return -1;
 		
 		if (root == NULL)
 			break;
@@ -237,16 +239,19 @@ Node* DeletePrefix (Node* root, char prefix[])
 
 Node* CompressTree (Node* root)
 {
+	Node * Croot = NULL;
+	Croot = clone(root, Croot);
+
 	// Pass One and Two
-	root = PassOneTwo (root);
+	Croot = PassOneTwo (Croot);
 
 	// Pass Three
-	root->nextHop = root->hopsList->hop;
+	Croot->nextHop = Croot->hopsList->hop;
 
-	emptyIntList(root->hopsList);
+	emptyIntList(Croot->hopsList);
 
-	root->left = PassThree (root->left, root->nextHop);
-	root->right = PassThree (root->right, root->nextHop);
+	Croot->left = PassThree (Croot->left, Croot->nextHop);
+	Croot->right = PassThree (Croot->right, Croot->nextHop);
 
-	return root;
+	return Croot;
 }
