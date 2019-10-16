@@ -112,20 +112,16 @@ Node* PassThree (Node* aux, int nextHop)
 
 	emptyIntList(aux->hopsList);
 
-	if (aux->left == NULL) {
-		if (aux->right == NULL) {
-			if (aux->nextHop == 0) {
-				free(aux);
-				return NULL;
-			}
+	if ((aux->left == NULL) && (aux->right == NULL))
+	{
+		if (aux->nextHop == 0) {
+			free(aux);
+			return NULL;
 		}
-		else
-			aux->right = PassThree (aux->right, value);
 	}
 	else {
 		aux->left = PassThree (aux->left, value);
-		if (aux->right != NULL)
-			aux->right = PassThree (aux->right, value);
+		aux->right = PassThree (aux->right, value);
 	}
 
 	return aux;
