@@ -34,11 +34,14 @@ void print(char p[16+1], int h){
 	printf(" || ");
 
 	size = getDigits(h);
-	for (int i = 0;  i < (int) floor((8 - size )/ (double) 2); i++){
+	int n = 8;
+	if (h<0)
+		n--;
+	for (int i = 0;  i < (int) floor((n - size )/ (double) 2); i++){
 		printf(" ");
 	}
 	printf("%d", h);
-	for (int i = 0;  i < (int) ceil((8 - size )/ (double) 2) ; i++){
+	for (int i = 0;  i < (int) ceil((n - size )/ (double) 2) ; i++){
 		printf(" ");
 	}
 	printf(" ||\n");

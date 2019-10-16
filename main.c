@@ -125,8 +125,12 @@ int main(int argc, char *argv[])
 			}
 			else if ((order == 'C') || (order == 'c')){
 				if (isCompressed){
-					printf("Tree already compressed.\n---\n\n");
-					break;
+					if (root == Croot){
+						printf("Tree already compressed.\n---\n\n");
+						break;
+					}
+					else
+						clean(Croot);
 				}
 				Croot = CompressTree(root);
 				isCompressed = true;

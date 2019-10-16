@@ -242,6 +242,9 @@ Node* CompressTree (Node* root)
 	Node * Croot = NULL;
 	Croot = clone(root, Croot);
 
+	if (Croot->nextHop == 0)
+		Croot->nextHop = -1;
+
 	// Pass One and Two
 	Croot = PassOneTwo (Croot);
 
