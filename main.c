@@ -54,15 +54,20 @@ int main(int argc, char *argv[])
 				else if (order == 'c' || order == 'C')
 					root = Croot;
 				else {
-					printf("Option not available\n---\n");
+					printf("Option not available\n\n---\n\n");
 					continue;
 				}
-				printf("\n---\n\n");
+			
 			} 
-			else 
+			else{
 				root = _root;
-
-			printf("(Enter [Q] to quit)\nIntroduce the action, Print [P], Search [S], Insert [I], Delete [D] or Compress [C]: ");
+				printf("(Enter [Q] to quit)\n");
+			}
+			
+			if (root == Croot)
+				printf("Introduce the action, Print [P], Search [S]: ");
+			else
+				printf("Introduce the action, Print [P], Search [S], Insert [I], Delete [D] or Compress [C]: ");
 			if (fgets(aux, sizeof(aux), stdin) == NULL) {
 				perror("fgets: ");
 				exit(-1);
@@ -71,7 +76,7 @@ int main(int argc, char *argv[])
 			//perform
 			if ((order == 'q') || (order == 'Q'))
 				return 0;
-			else if ((order == 'i') || (order == 'I')){
+			else if ( (order == 'i') || (order == 'I') && root != Croot){
 				printf("Write the prefix to be inserted: ");	
 				if (fgets(prefix, 50, stdin) == NULL){
 					perror("fgets: ");
@@ -112,7 +117,7 @@ int main(int argc, char *argv[])
 				
 				break;
 			}
-			else if ((order == 'D') || (order == 'd')) {
+			else if ( (order == 'D') || (order == 'd') && root != Croot) {
 				printf("Write the prefix to be deleted: ");	
 				if (fgets(prefix, 50, stdin) == NULL) {
 					perror("fgets: ");
@@ -128,7 +133,7 @@ int main(int argc, char *argv[])
 			else if ((order == 'C') || (order == 'c')) {
 				if (isCompressed) {
 					if (root == Croot) {
-						printf("Tree already compressed.\n---\n\n");
+						printf("Tree already compressed.\n\n---\n\n");
 						break;
 					}
 					else
@@ -136,10 +141,10 @@ int main(int argc, char *argv[])
 				}
 				Croot = CompressTree(root);
 				isCompressed = true;
-				printf("Tree compressed.\n---\n\n");
+				printf("Tree compressed.\n\n---\n\n");
 				break;
 			}
-			printf("Option not available\n---\n");
+			printf("Option not available\n\n---\n\n");
 		}
 	}
 
