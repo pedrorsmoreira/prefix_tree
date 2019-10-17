@@ -162,12 +162,9 @@ Node* DeletePrefix (Node* root, char prefix[])
 				if ((aux->left->left != NULL) && (aux->left->right != NULL))
 					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				else if ((aux->left->left != NULL) || (aux->left->right != NULL)) {
-					if (aux->left->nextHop == 0) {
-						if (nodeToStartDeleting == NULL)
+					if (nodeToStartDeleting == NULL)
+						if (aux->left->nextHop == 0)
 							updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
-					}
-					else
-						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
 				else {
 					if (nodeToStartDeleting == NULL)
@@ -186,12 +183,9 @@ Node* DeletePrefix (Node* root, char prefix[])
 				if ((aux->right->left != NULL) && (aux->right->right != NULL))
 					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				else if ((aux->right->left != NULL) || (aux->right->right != NULL)) {
-					if (aux->right->nextHop == 0) {
-						if (nodeToStartDeleting == NULL)
-							updateDeletingVariables (&auxToStartDeleting, 1, &nodeToStartDeleting, aux);
-					}
-					else
-						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
+					if (nodeToStartDeleting == NULL)
+						if (aux->right->nextHop == 0)
+							updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
 				}
 				else {
 					if (nodeToStartDeleting == NULL)
