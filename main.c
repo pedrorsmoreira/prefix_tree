@@ -156,6 +156,6 @@ int main(int argc, char *argv[])
 
 void print_usage(char *program)
 {
-	fprintf(stderr, "Usage: %s [-f input-file]\n", program);
+	fprintf(stderr, "Usage: %s -f <input-file>\n", program);
 	exit(1);
 }
