@@ -110,7 +110,6 @@ int LookUp (Node* root, char addr[])
 	}
 
 	int nextHop = root->nextHop;
-	if (nextHop < 0) nextHop = 0;
 	for (int i = 0; i < strlen(addr); i++) {	
 		if (addr[i] == '0')
 			root = root->left;
@@ -163,9 +162,12 @@ Node* DeletePrefix (Node* root, char prefix[])
 				if ((aux->left->left != NULL) && (aux->left->right != NULL))
 					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				else if ((aux->left->left != NULL) || (aux->left->right != NULL)) {
-					if (nodeToStartDeleting == NULL)
-						if (aux->left->nextHop == 0)
+					if (aux->left->nextHop == 0) {
+						if (nodeToStartDeleting == NULL)
 							updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
+					}
+					else
+						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
 				else {
 					if (nodeToStartDeleting == NULL)
@@ -184,9 +186,12 @@ Node* DeletePrefix (Node* root, char prefix[])
 				if ((aux->right->left != NULL) && (aux->right->right != NULL))
 					updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				else if ((aux->right->left != NULL) || (aux->right->right != NULL)) {
-					if (nodeToStartDeleting == NULL)
-						if (aux->right->nextHop == 0)
-							updateDeletingVariables (&auxToStartDeleting, 0, &nodeToStartDeleting, aux);
+					if (aux->right->nextHop == 0) {
+						if (nodeToStartDeleting == NULL)
+							updateDeletingVariables (&auxToStartDeleting, 1, &nodeToStartDeleting, aux);
+					}
+					else
+						updateDeletingVariables (&auxToStartDeleting, 2, &nodeToStartDeleting, NULL);
 				}
 				else {
 					if (nodeToStartDeleting == NULL)
