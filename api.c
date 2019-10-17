@@ -38,10 +38,11 @@ Node* PrefixTree (char* filename)
 
 Node* InsertPrefix (Node* root, char prefix[], int nextHop)
 {
-	if (nextHop < -1){
+	if (nextHop < -1) {
 		printf("Invalid next hop\n");
 		return root;
 	}
+	
 	int length = strlen(prefix);
 
 	if (root == NULL)
