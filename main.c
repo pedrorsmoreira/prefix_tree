@@ -105,6 +105,8 @@ int main(int argc, char *argv[])
 				int nh = LookUp(root, prefix);
 				if (nh < 0)
 					printf("Wrong address.\n \n---\n\n");
+				else if (nh == 0)
+					printf("No forwarding route, drop the packet.\n \n---\n\n");
 				else
 					printf("Next hop: %d.\n \n---\n\n", nh);
 				
