@@ -43,7 +43,7 @@ Node* InsertPrefix (Node* root, char prefix[], int nextHop)
 	if (root == NULL)
 		root = newNode(0);
 
-	if (length == 1 && prefix[0] == 'e' || prefix == ""){
+	if (length == 1 && prefix[0] == 'e' || prefix == "") {
 		root->nextHop = nextHop;
 		return root;
 	}
@@ -258,6 +258,9 @@ Node* CompressTree (Node* root)
 
 	Croot->left = PassThree (Croot->left, Croot->nextHop);
 	Croot->right = PassThree (Croot->right, Croot->nextHop);
+
+	if (Croot->nextHop == -1)
+		Croot->nextHop = 0;
 
 	return Croot;
 }
