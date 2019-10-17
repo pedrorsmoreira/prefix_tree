@@ -20,9 +20,8 @@ Node* PrefixTree (char* filename)
 
 	// read a line
 	while (fgets (line, sizeof line, fp) != NULL) { 
-		// Returns first token
-		char *token = strtok (line, " ");
-		char *token2 = strtok (NULL, " ");
+		char *token = strtok (line, " "); // Returns first token
+		char *token2 = strtok (NULL, " "); // Returns second token
 
 		if ((token == NULL) && (token2 == NULL)) {
 			printf("Input file in the wrong structure\n");

@@ -22,14 +22,16 @@ Node* newNode (int nextHop)
 	return(node); 
 }
 
-void clean(Node * root){
+void clean(Node * root)
+{
 	if (root == NULL) return;
 	if (root->left != NULL) clean (root->left);
 	if (root->right != NULL) clean (root->right);
 	free(root);
 }
 
-Node* clone(Node * root, Node * newRoot){
+Node* clone(Node * root, Node * newRoot)
+{
 	if (root == NULL)
 		return NULL;
 
