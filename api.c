@@ -110,6 +110,7 @@ int LookUp (Node* root, char addr[])
 	}
 
 	int nextHop = root->nextHop;
+	if (nextHop < 0) nextHop = 0;
 	for (int i = 0; i < strlen(addr); i++) {	
 		if (addr[i] == '0')
 			root = root->left;
@@ -132,6 +133,11 @@ int LookUp (Node* root, char addr[])
 
 Node* DeletePrefix (Node* root, char prefix[])
 {
+	if (strlen(prefix) < 1) {
+		printf("Prefix invalid\n");
+		return root;
+	}
+
 	Node* aux = root;
 
 	int auxToStartDeleting = 2;
