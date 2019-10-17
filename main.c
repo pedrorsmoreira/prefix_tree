@@ -89,7 +89,10 @@ int main(int argc, char *argv[])
 					exit(-1);
 				}
 				nexthop[strlen(nexthop)-1] = '\0';
-				root = InsertPrefix(root, prefix, atoi(nexthop));
+				if (strlen(nexthop) > 9)
+					printf("Invalid next hop\n");
+				else
+					root = InsertPrefix(root, prefix, atoi(nexthop));
 
 				printf("\n---\n\n");
 
